@@ -9,6 +9,7 @@ import sys
 parser = argparse.ArgumentParser()
 
 parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+parser.add_argument('--format', nargs='?', type=str, default='json', choices=['json','txt'])
 
 args = parser.parse_args()
 
@@ -30,6 +31,7 @@ def main():
   sentences = data['.child'][0]['.child'][0]
 
   parses = {}
+  printParses = []
   
   for s in sentences['.child']:
     sentence = s['text']
@@ -37,6 +39,7 @@ def main():
     tokens = {}
     tree = {}
     root = ''
+    treeString = ''
     for c in childs:
       if c['.tag'] == 'tokens':
         for t in c['.child']:
@@ -53,9 +56,15 @@ def main():
           tree[span['id']] = elem
 
     if (len(tree) == 0):
-      parses[sentence] = ''
+      treeString= ''
     else:
-      parses[sentence] = '(ROOT ' + recursive(root, tree, tokens) + ')'
-  print(json.dumps(parses, indent=2))
+      treeString = '(ROOT ' + recursive(root, tree, tokens) + ')'
+    parses[sentence] = treeString
+    printParses.append(treeString)
+  if args.format == 'json':
+    print(json.dumps(parses, indent=2))
+  else:
+    for parse in printParses:
+      print(parse)
 
 main()
