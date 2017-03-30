@@ -18,4 +18,4 @@ java -cp "$scriptdir/*" jigg.pipeline.Pipeline \
   -output $2 \
   > /dev/null 2>&1
 
-python $scriptdir/generate_berkeley_trees.py $2 --format "txt"
+python $scriptdir/generate_trees.py $2 --format "txt"
