@@ -3,7 +3,7 @@ Get parsing tree and represent it into sentence.
 
 ## Requirement
 - jigg 0.6.2+
-  - jigg-0.6.2.jar is must be stored on same directory.
+  - jigg-0.6.2.jar is must be put on the same directory.
   - You can download the jar file from:
     https://github.com/mynlp/jigg/releases/download/v-0.6.2/jigg-0.6.2.tar.gz
 - Grammar file for Berkeley parser.
