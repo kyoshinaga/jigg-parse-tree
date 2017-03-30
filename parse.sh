@@ -11,8 +11,9 @@ scriptdir=`dirname $0`
 java -cp "$scriptdir/*" jigg.pipeline.Pipeline \
   -annotators "corenlp[tokenize,ssplit,pos,lemma,ner],berkeleyparser" \
   -berkeleyparser.grFileName "$scriptdir/eng_sm6.gr" \
+  -corenlp.ssplit.eolonly "true" \
   -outputFormat json \
-  -nThreads 32 \
+  -nThreads 50 \
   -file $1 \
   -output $2 \
   > /dev/null 2>&1
